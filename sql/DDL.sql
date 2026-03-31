@@ -7,57 +7,57 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 -- -----------------------------------------------------
 -- Schema corrida_db
 -- -----------------------------------------------------
-DROP SCHEMA IF EXISTS `corrida_db` ;
+DROP SCHEMA IF EXISTS corrida_db ;
 
 -- -----------------------------------------------------
 -- Schema corrida_db
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `corrida_db` DEFAULT CHARACTER SET utf8 ;
-USE `corrida_db` ;
+CREATE SCHEMA IF NOT EXISTS corrida_db DEFAULT CHARACTER SET utf8 ;
+USE corrida_db ;
 
 -- -----------------------------------------------------
--- Table `corrida_db`.`usuarios`
+-- Table corrida_db.usuarios
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `corrida_db`.`usuarios` ;
+DROP TABLE IF EXISTS corrida_db.usuarios ;
 
-CREATE TABLE IF NOT EXISTS `corrida_db`.`usuarios` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `nome` VARCHAR(45) NOT NULL,
-  `email` VARCHAR(255) NOT NULL,
-  `senha` VARCHAR(255) NOT NULL,
-  `userscol` VARCHAR(255) NULL,
-  PRIMARY KEY (`id`))
+CREATE TABLE IF NOT EXISTS corrida_db.usuarios (
+  id INT NOT NULL AUTO_INCREMENT,
+  nome VARCHAR(45) NOT NULL,
+  email VARCHAR(255) NOT NULL,
+  senha VARCHAR(255) NOT NULL,
+  userscol VARCHAR(255) NULL,
+  PRIMARY KEY (id))
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `corrida_db`.`corredores`
+-- Table corrida_db.corredores
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `corrida_db`.`corredores` ;
+DROP TABLE IF EXISTS corrida_db.corredores ;
 
-CREATE TABLE IF NOT EXISTS `corrida_db`.`corredores` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `nome` VARCHAR(255) NOT NULL,
-  `turma` VARCHAR(255) NOT NULL,
-  PRIMARY KEY (`id`))
+CREATE TABLE IF NOT EXISTS corrida_db.corredores (
+  id INT NOT NULL AUTO_INCREMENT,
+  nome VARCHAR(255) NOT NULL,
+  turma VARCHAR(255) NOT NULL,
+  PRIMARY KEY (id))
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `corrida_db`.`voltas`
+-- Table corrida_db.voltas
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `corrida_db`.`voltas` ;
+DROP TABLE IF EXISTS corrida_db.voltas ;
 
-CREATE TABLE IF NOT EXISTS `corrida_db`.`voltas` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `tempo` DECIMAL(10,2) NULL,
-  `data` TIMESTAMP NULL,
-  `corredores_id` INT NOT NULL,
-  PRIMARY KEY (`id`),
-  INDEX `fk_voltas_corredores_idx` (`corredores_id` ASC) VISIBLE,
-  CONSTRAINT `fk_voltas_corredores`
-    FOREIGN KEY (`corredores_id`)
-    REFERENCES `corrida_db`.`corredores` (`id`)
+CREATE TABLE IF NOT EXISTS corrida_db.voltas (
+  id INT NOT NULL AUTO_INCREMENT,
+  tempo DECIMAL(10,2) NULL,
+  data TIMESTAMP NULL,
+  corredores_id INT NOT NULL,
+  PRIMARY KEY (id),
+  INDEX fk_voltas_corredores_idx (corredores_id ASC) VISIBLE,
+  CONSTRAINT fk_voltas_corredores
+    FOREIGN KEY (corredores_id)
+    REFERENCES corrida_db.corredores (id)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
