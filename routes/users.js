@@ -23,24 +23,22 @@ routes.post('/create', (req, res) => {
     });
 });
 
+//editar um usuario
 routes.put('/:id', (req, res) => {
     const { id } = req.params; 
-    const { nome, email } = req.body; 
-
-    db.query('UPDATE users SET nome = ?, email = ? WHERE id = ?', [nome, email, id], (err, result) => {
+    const { nome, email, senha } = req.body; 
+    db.query('UPDATE usuarios SET nome = ?, email = ? WHERE id = ?', 
+        [nome, email, id], (err, result) => {
         if (err) {
-            return res.status(500).json({ error: 'Erro ao atualizar usuário' });
-        }
-        
-        if (result.affectedRows === 0) {
-            return res.status(404).json({ error: 'Usuário não encontrado' });
-        }
-        
-        res.json({ message: 'Usuário atualizado com sucesso' });
+            res.status(500).json({ error: 'Erro ao atualizar usuário' });
+        }else {
+            res.status(201).json({ id, nome, email });
+        }   
     });
 });
 
-routes.delete('/:id', (req, res) => {
+//deletar um usuario
+routes.delete('/delete/:id', (req, res) => {
     const { id } = req.params; 
 
     db.query('DELETE FROM users WHERE id = ?', [id], (err, result) => {
