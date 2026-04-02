@@ -15,8 +15,7 @@ routes.get('/', (req, res) => {
 routes.post('/create', (req, res) => {
     const { nome, turma, } = req.body;
     db.query('INSERT INTO corredores (nome, turma, ) VALUES (?, ?)',
-        [nome, turma, 
-        ], (err, result) => {
+        [nome, turma, ], (err, result) => {
             if (err) {
                 res.status(500).json({ error: 'Erro ao criar um corredor' });
             } else {
