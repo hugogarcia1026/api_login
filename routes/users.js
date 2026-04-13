@@ -11,7 +11,7 @@ routes.get('/', (req, res) => {
     });
 });
 
-routes.post('/z', (req, res) => {
+routes.post('/create', (req, res) => {
     const { nome, email } = req.body; 
 
     db.query('INSERT INTO users (nome, email) VALUES (?, ?)', [nome, email], (err, result) => {
@@ -39,7 +39,7 @@ routes.put('edit/:id', (req, res) => {
     });
 });
 
-routes.delete('delete/:id', (req, res) => {
+routes.delete('/delete', (req, res) => {
     const { id } = req.params; 
 
     db.query('DELETE FROM users WHERE id = ?', [id], (err, result) => {
